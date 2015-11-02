@@ -248,6 +248,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	 * @return The port number.
 	 */
 	public int getPort() {
+		if (getAddress() == null) return 0;
 		int port = getAddress().getPort();
 		if( port == 0 && server != null ) {
 			port = server.socket().getLocalPort();
@@ -276,6 +277,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 			ServerSocket socket = server.socket();
 			socket.setReceiveBufferSize( WebSocketImpl.RCVBUF );
 			socket.bind( address );
+			System.out.println( "Socket Port: " + socket.getLocalPort());
 			selector = Selector.open();
 			server.register( selector, server.validOps() );
 		} catch ( IOException ex ) {
