@@ -133,7 +133,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	 * and comply with <tt>Draft</tt> version <var>draft</var>.
 	 * 
 	 * @param address
-	 *            The address (host:port) this server should listen on.
+	 *            The address (host:port) this server should listen on. If null, this socket will be bound to an available local address on any free port.
 	 * @param decodercount
 	 *            The number of {@link WebSocketWorker}s that will be used to process the incoming network data. By default this will be <code>Runtime.getRuntime().availableProcessors()</code>
 	 * @param drafts
@@ -149,8 +149,8 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	 * @see <a href="https://github.com/TooTallNate/Java-WebSocket/wiki/Drafts" > more about drafts</a>
 	 */
 	public WebSocketServer( InetSocketAddress address , int decodercount , List<Draft> drafts , Collection<WebSocket> connectionscontainer ) {
-		if( address == null || decodercount < 1 || connectionscontainer == null ) {
-			throw new IllegalArgumentException( "address and connectionscontainer must not be null and you need at least 1 decoder" );
+		if( decodercount < 1 || connectionscontainer == null ) {
+			throw new IllegalArgumentException( "connectionscontainer must not be null and you need at least 1 decoder" );
 		}
 
 		if( drafts == null )
