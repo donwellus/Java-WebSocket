@@ -738,4 +738,8 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	protected void onServerSocketBind() {
 		return;
 	}
+
+	protected ServerSocket getServerSocket() {
+		return server.socket();
+	}
 }
