@@ -276,6 +276,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 			ServerSocket socket = server.socket();
 			socket.setReceiveBufferSize( WebSocketImpl.RCVBUF );
 			socket.bind( address );
+			onServerSocketBind();
 			selector = Selector.open();
 			server.register( selector, server.validOps() );
 		} catch ( IOException ex ) {
@@ -729,5 +730,12 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 		 * @return The channel on which the read and write operations will be performed.<br>
 		 */
 		public ByteChannel wrapChannel( SocketChannel channel, SelectionKey key ) throws IOException;
+	}
+
+	/**
+	 * Called when server socket is bound
+	 **/
+	protected void onServerSocketBind() {
+		return;
 	}
 }
